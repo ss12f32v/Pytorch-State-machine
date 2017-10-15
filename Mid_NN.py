@@ -19,6 +19,8 @@ class MainNN_Model(nn.Module):
 		self.linear2 = nn.Linear(hidden_size, state_number)
 	def forward(self,inputs):
 		x_0, x_1 = inputs
+		# print(x_0)
+		# print(x_1)
 		StateEncoder_output =self.StateEncoder(x_0)
 		TransitionEncoder_output =self.TransitionEncoder(x_1)
 

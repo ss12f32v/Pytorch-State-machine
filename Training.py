@@ -23,6 +23,7 @@ StateEncodeModel = State_and_Transition_encoding.StateEncodeModel(state_number, 
 TransistionEncodelModel = State_and_Transition_encoding .TransistionEncodelModel(state_number, embedding_dim)
 
 model = Mid_NN.MainNN_Model(StateEncodeModel, TransistionEncodelModel)
+# model = model.cuda()
 optimizer = optim.SGD(model.parameters(), lr=0.001)
 def main():
 	for i in range(epoch):
@@ -31,15 +32,17 @@ def main():
 		inputs = (x,y)
 		tagets = z
 		inputs = autograd.Variable(torch.LongTensor(inputs))
-		
+
 		model.zero_grad()
 		log_probs = model(inputs)
 		loss = loss_function(log_probs, autograd.Variable(torch.LongTensor(tagets)))
 
+		
+		# print(autograd.Variable(torch.LongTensor(tagets)))
 		loss.backward()
 		optimizer.step()
 
-		print(loss)
+		print("Loss: ",loss)
 	torch.save(model.state_dict(),checkpoint_name)
 	print("Model has been saved as %s.\n" % checkpoint_name)
 
