@@ -1,7 +1,6 @@
-import torch
 import numpy as np
+import random 
 
-from torch.autograd import Variable
 state_number =5 
 batch_size = 20 
 class Vocabulary(object):
@@ -21,18 +20,20 @@ class Parser(object):
 
 def procedure(x):
 	x = parse.split_data(x)
-	x[0] = vocab.one_hot_encoding(state_number,x[0])
+	# x[0] = vocab.one_hot_encoding(state_number,x[0])
 	x[1] = vocab.one_hot_encoding(len(vocab.state_dict),vocab.state_dict[x[1]])
-	x[2] = vocab.one_hot_encoding(state_number,x[2])
+	# x[2] = vocab.one_hot_encoding(state_number,x[2])
 	return x 
 
-def mini_batch(batch_size,original_index):
-	for i in range(batch_size):
-		line = dataset.readline()
+def mini_batch(batch_size=batch_size):
+	for i in range (batch_size):
+		myline =random.choice(dataset)
+		x = procedure(myline)
 
+	print(x[0],x[1],x[2])
 
 if __name__== '__main__':
-	dataset =  open("Data.txt",'r',encoding='utf-8') 
+	dataset =  open("Data.txt",'r',encoding='utf-8').read().splitlines()
 	vocab = Vocabulary();
 	parse = Parser()
 	# print("test one hot encoding array")
@@ -40,7 +41,11 @@ if __name__== '__main__':
 	# print(vocab.one_hot_encoding(5,a))
 	print("test total procedure")
 	x = "1,A,2"
-	print (x = procedure(x))
+	mini_batch()
+	# for i in range(26):
+		# print (i)	
+		# mini_batch()
+	print ( procedure(x))
 
 
 
