@@ -10,7 +10,7 @@ embedding_dim = 100
 embedding_size = 200
 hidden_size =100
 class MainNN_Model(nn.Module):
-	def __init__(self, StateEncoder, TransitionEncoder):
+	def __init__(self, StateEncoder, TransitionEncoder,batch_size=20):
 		super(MainNN_Model, self).__init__()
 		self.StateEncoder = StateEncoder
 		self.TransitionEncoder = TransitionEncoder
@@ -23,7 +23,8 @@ class MainNN_Model(nn.Module):
 		# print(x_1)
 		StateEncoder_output =self.StateEncoder(x_0)
 		TransitionEncoder_output =self.TransitionEncoder(x_1)
-
+		# print(StateEncoder_output.size())
+		# print(TransitionEncoder_output.size())
 		MainNN_input = torch.cat((StateEncoder_output,TransitionEncoder_output),1)
 		# print(MainNN_input.size())
 

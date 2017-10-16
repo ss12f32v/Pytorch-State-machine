@@ -37,6 +37,7 @@ class Parser(object):
 			x_2.append(x[2] )
 
 		return x_0, x_1, x_2
+		
 if __name__== '__main__':
 	dataset = open("Data.txt",encoding='utf-8').read().splitlines()
 	# vocab = Vocabulary();

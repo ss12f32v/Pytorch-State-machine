@@ -12,19 +12,21 @@ state_number = 5
 Transition_Number = 5 
 
 class StateEncodeModel(nn.Module):
-	def __init__(self, state_number, embedding_dim=100):
+	def __init__(self, state_number, batch_size, embedding_dim=100):
 		super(StateEncodeModel, self).__init__()
 		self.embeddings = nn.Embedding(state_number, embedding_dim)
 	def forward(self, inputs):
 		embeds = self.embeddings(inputs)
+		# print(embeds.size())
 		return embeds.view(batch_size,-1)
 
 class TransistionEncodelModel(nn.Module):
-	def __init__(self, Transition_Number,embedding_dim=100):
+	def __init__(self, Transition_Number, batch_size, embedding_dim=100):
 		super(TransistionEncodelModel, self).__init__()
 		self.embeddings = nn.Embedding(Transition_Number, embedding_dim)
 	def forward(self, inputs):
 		embeds = self.embeddings(inputs)
+		# print(embeds.size())
 		return embeds.view(batch_size,-1)
 
 if __name__== '__main__':
